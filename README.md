@@ -131,4 +131,7 @@ I can use [Heroku Scheduler](https://elements.heroku.com/addons/scheduler) addon
 1. Get the list of repository in the `repo` collection.
 2. Use [daily-update-stargazers.js](./utils/daily-update-stargazers.js) to update the stargazers.
 
+## To Do
+1. Compare the stargazers that cancel their stars
+2. Daily update script
 
