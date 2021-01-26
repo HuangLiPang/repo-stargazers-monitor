@@ -135,3 +135,7 @@ I can use [Heroku Scheduler](https://elements.heroku.com/addons/scheduler) addon
 1. Compare the stargazers that cancel their stars
 2. Daily update script
 
+## Reference
+1. [GitHub API](https://docs.github.com/en/rest)
+2. [list-stargazers](https://docs.github.com/en/rest/reference/activity#list-stargazers)
+3. [get-a-repository](https://docs.github.com/en/rest/reference/repos#get-a-repository)
