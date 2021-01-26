@@ -8,18 +8,34 @@ Once you use `add-repo` to add the repo to the system. The system will automatic
 
 ## Getting Start
 Clone this repository:
-    ```bash
-    git clone https://github.com/HuangLiPang/repo-stargazers-monitor.git
-    ```
+
+```bash
+git clone https://github.com/HuangLiPang/repo-stargazers-monitor.git
+```
+    
 Install requirements
-    ```bash
-    cd repo-stargazers-monitor
-    npm install
-    ```
+    
+```bash
+cd repo-stargazers-monitor
+npm install
+```
+
+Create a `.env` file contains `PORT`, `MONGODB_URI`, `REPO_COLLECTION`, `BEFORE_COLLECTION`, and `NODE_ENV`. Pleasse check the example below.
+
+```text
+PORT=5000
+MONGODB_URI=mongodb+srv://<username>:<password>@example.mongodb.com/<dbname>?retryWrites=true&w=majority
+REPO_COLLECTION=repo
+BEFORE_COLLECTION=before
+NODE_ENV=production
+```
+
 Start the server
-    ```bash
-    npm start
-    ```
+
+```bash
+npm start
+```
+    
 ## Try Demo
 The system is deployed on [Heroku](https://www.heroku.com/home). Please try this url [https://repo-stargazers-monitor.huanglipang.me](https://repo-stargazers-monitor.huanglipang.me) with the end point `add-repo` and `list-stargazers`.
 
