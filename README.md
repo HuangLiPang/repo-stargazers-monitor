@@ -21,7 +21,7 @@ Start the server
     npm start
     ```
 ## Try Demo
-The system is deployed on [Heroku](https://www.heroku.com/home). Please try this url [https://repo-stargazers-monitor.huanglipang.me](https://repo-stargazers-monitor.huanglipang.me).
+The system is deployed on [Heroku](https://www.heroku.com/home). Please try this url [https://repo-stargazers-monitor.huanglipang.me](https://repo-stargazers-monitor.huanglipang.me) with the end point `add-repo` and `list-stargazers`.
 
 ## Endpoint
 
