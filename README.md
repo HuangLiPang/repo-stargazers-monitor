@@ -8,18 +8,18 @@ Once you use `add-repo` to add the repo to the system. The system will automatic
 
 ## Getting Start
 Clone this repository:
-
+    ```bash
     git clone https://github.com/HuangLiPang/repo-stargazers-monitor.git
-
+    ```
 Install requirements
-
+    ```bash
     cd repo-stargazers-monitor
     npm install
-
+    ```
 Start the server
-
+    ```bash
     npm start
-
+    ```
 ## Try Demo
 The system is deployed on [Heroku](https://www.heroku.com/home). Please try this url [https://repo-stargazers-monitor.huanglipang.me](https://repo-stargazers-monitor.huanglipang.me).
 
@@ -33,7 +33,7 @@ The system is deployed on [Heroku](https://www.heroku.com/home). Please try this
         | owner | string | Repo's owner (github account) |
         | repo | string | Repo's name |
     -   Code samples
-        ```
+        ```bash
         curl https://repo-stargazers-monitor.huanglipang.me/add-repo?repo=repo-stargazers-monitor&owner=HuangLiPang
         ```
     -   Response
@@ -41,7 +41,7 @@ The system is deployed on [Heroku](https://www.heroku.com/home). Please try this
             ```
             Status: 200 OK
             ```
-            ```
+            ```json
             {
                 "owner": "HuangLiPang",
                 "repo": "repo-stargazers-monitor",
@@ -53,7 +53,7 @@ The system is deployed on [Heroku](https://www.heroku.com/home). Please try this
             ```
             Status:400 Bad Request
             ```
-            ```
+            ```json
             {
                 "error": 400,
                 "code": 400,
@@ -70,7 +70,7 @@ The system is deployed on [Heroku](https://www.heroku.com/home). Please try this
         | start_date | string | UTC time in format `yyyy-mm-dd` |
         | end_date | string | UTC time in format `yyyy-mm-dd` |
     -   Code samples
-        ```
+        ```bash
         crul https://repo-stargazers-monitor.huanglipang.me/list-stargazers?repo=repo-stargazers-monitor&owner=HuangLiPang&start_time=2021-1-25&end_time=2021-1-25
         ```
     -   Response
@@ -78,7 +78,7 @@ The system is deployed on [Heroku](https://www.heroku.com/home). Please try this
             ```
             Status: 200 OK
             ```
-            ```
+            ```json
             {
                 "owner": "HuangLiPang",
                 "repo": "repo-stargazers-monitor",
@@ -89,14 +89,13 @@ The system is deployed on [Heroku](https://www.heroku.com/home). Please try this
             ```
             Status:400 Bad Request
             ```
-            ```
+            ```json
             {
                 "error": 400,
                 "code": 400,
                 "message": "repo does not exist in db"
             }
             ```
-        ```
 
 ## Database
 
@@ -105,22 +104,21 @@ I use [MongoDB Atlas](https://www.mongodb.com/cloud/atlas) to store the stargaze
 ### Schema
 1. Repo schema: 
     Store the added repositories information.
-    ```
+    ```javascript
     {
         owner: String, // github repo's owner
         repo: String, // repo name
         stargazers_count: Number, // number of stargazers
         created_date: String, // the date that the repo is added
     }
-        ```
-2. Stargazer schema
     ```
+2. Stargazer schema
+    ```javascript
     {
         repo_id: ObjectId, // the repo's object id in the repo collection
         username: String, // github username
     }
     ```
-
 ## Daily Update
 
 Please check the [daily-update-stargazers.js](./utils/daily-update-stargazers.js) and use test script in the [test directory](./test) to test.
