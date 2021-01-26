@@ -4,7 +4,6 @@ const morgan = require("morgan");
 const createError = require("http-errors");
 const HTTPStatuses = require("statuses");
 const { initializer } = require("./db/initializer");
-require("dotenv").config();
 
 require("dotenv").config();
 initializer();
