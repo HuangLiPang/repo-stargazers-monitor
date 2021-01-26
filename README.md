@@ -20,6 +20,8 @@ Start the server
 
     npm start
 
+## Try Demo
+The system is deployed on [Heroku](https://www.heroku.com/home). Please try this url [https://repo-stargazers-monitor.huanglipang.me](https://repo-stargazers-monitor.huanglipang.me).
 
 ## Endpoint
 
@@ -32,7 +34,7 @@ Start the server
         | repo | string | Repo's name |
     -   Code samples
         ```
-        curl http://baseurl/add-repo?repo=repo-stargazers-monitor&owner=HuangLiPang
+        curl https://repo-stargazers-monitor.huanglipang.me/add-repo?repo=repo-stargazers-monitor&owner=HuangLiPang
         ```
     -   Response
         - default 
@@ -69,7 +71,7 @@ Start the server
         | end_date | string | UTC time in format `yyyy-mm-dd` |
     -   Code samples
         ```
-        crul https://baseurl/list-stargazers?repo=repo-stargazers-monitor&owner=HuangLiPang&start_time=2021-1-25&end_time=2021-1-25
+        crul https://repo-stargazers-monitor.huanglipang.me/list-stargazers?repo=repo-stargazers-monitor&owner=HuangLiPang&start_time=2021-1-25&end_time=2021-1-25
         ```
     -   Response
         - default 
@@ -126,5 +128,7 @@ Please check the [daily-update-stargazers.js](./utils/daily-update-stargazers.js
 ### Implementation
    
 The [daily-update-stargazers.js](./utils/daily-update-stargazers.js) will check the `stargazers_count` of the repository in the `repo` collection and compare it with the current stargazers from the [list-stargazers](https://docs.github.com/en/rest/reference/activity#list-stargazers) github api. If the number is different, it will update the newly stargazers.
+
+I can use [Heroku Scheduler](https://elements.heroku.com/addons/scheduler) addon to update the stargazers.
 
 
