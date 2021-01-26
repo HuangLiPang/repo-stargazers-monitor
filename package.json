@@ -1,22 +1,22 @@
 {
-    "name": "million-rows",
+    "name": "github-repo-stargazers",
     "version": "1.0.0",
-    "description": "Query million rows in few milliseconds",
+    "description": "System76 backend assessment - GitHub repo stargazers",
     "engines": {
         "node": "12.x"
     },
     "main": "index.js",
     "scripts": {
-        "start": "node index.js",
-        "heroku-postbuild": "cd client && npm install && npm run build"
+        "start": "node index.js"
     },
     "author": "Li-Pang Huang",
     "license": "ISC",
     "dependencies": {
+        "axios": "^0.21.1",
         "body-parser": "^1.17.2",
-        "cors": "^2.8.5",
-        "express": "^4.15.3",
         "dotenv": "^8.2.0",
-        "mongoose": "5.10.11"
+        "express": "^4.15.3",
+        "mongoose": "5.10.11",
+        "morgan": "^1.10.0"
     }
 }

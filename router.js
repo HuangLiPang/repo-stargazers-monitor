@@ -1,5 +1,7 @@
-const searchController = require("./controllers/search-controller");
+const { addRepo } = require("./controllers/add-repo");
+const { listStargazers } = require("./controllers/list-stargazers");
 
 module.exports = (app) => {
-    app.post("/search", searchController.search);
+    app.get("/add-repo", addRepo);
+    app.get("/list-stargazers", listStargazers);
 };
