@@ -71,7 +71,7 @@ The system is deployed on [Heroku](https://www.heroku.com/home). Please try this
             ```
             ```json
             {
-                "error": 400,
+                "error": "Bad Request",
                 "code": 400,
                 "message": "repo not found"
             }
@@ -107,7 +107,7 @@ The system is deployed on [Heroku](https://www.heroku.com/home). Please try this
             ```
             ```json
             {
-                "error": 400,
+                "error": "Bad Request",
                 "code": 400,
                 "message": "repo does not exist in db"
             }
