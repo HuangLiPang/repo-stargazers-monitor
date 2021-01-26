@@ -7,23 +7,31 @@ const BEFORE_COLLECTION = process.env.BEFORE_COLLECTION;
 const { Schema } = mongoose;
 const ObjectId = Schema.ObjectId;
 
+// repo schema
+// store repo information
 const repoSchema = new Schema(
     {
-        owner: String,
-        repo: String,
-        stargazers_count: Number,
-        created_date: String,
+        owner: String, // github repo's owner
+        repo: String, // repo name
+        stargazers_count: Number, // number of stargazers
+        created_date: String, // the date that the repo is added
     },
     {
         collection: REPO_COLLECTION,
     }
 );
 
+// stargazer schema
 const stargazerSchema = new Schema({
-    repo_id: ObjectId,
-    username: String,
+    repo_id: ObjectId, // the repo's object id in the repo collection
+    username: String, // github username
 });
 
+/**
+ * Description:
+ *      establish database connection
+ *
+ */
 function initializer() {
     // log query
     mongoose.set("debug", true);
@@ -33,7 +41,7 @@ function initializer() {
         useUnifiedTopology: true,
         useNewUrlParser: true,
     });
-    // create repo collection
+    // create collections
     mongoose.model(REPO_COLLECTION, repoSchema);
     mongoose.model(BEFORE_COLLECTION, stargazerSchema);
 }

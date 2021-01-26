@@ -1,17 +1,33 @@
 const { stargazerSchema, initializer } = require("../db/initializer");
+
+// initialize db connection
 initializer();
-const { getStargazersCount, getStargazersList } = require("./add-repo");
+const { getStargazersCount, getStargazersList } = require("../controllers/add-repo");
 const mongoose = require("mongoose");
 
 require("dotenv").config();
 const REPO_COLLECTION = process.env.REPO_COLLECTION;
-
 const repoCollection = mongoose.model(REPO_COLLECTION);
 
+/**
+ * Description:
+ *      Get collection from the mongodb.
+ *
+ * @param {string} name collection name
+ * @return {model} mongoose model instance of the collection
+ */
 function getCollection(name) {
-    return mongoose.model(name, stargazerSchema);
+    mongoose.model(name, stargazerSchema);
+    return mongoose.model(name);
 }
 
+/**
+ * Description:
+ *      Update number of stargazers in the repo collection
+ *
+ * @param {string} repoId repo id in the repo collection
+ * @param {number} stargazersCount number of stargazers
+ */
 async function updateStargazersCount(repoId, stargazersCount) {
     await repoCollection.bulkWrite([
         {
@@ -27,6 +43,14 @@ async function updateStargazersCount(repoId, stargazersCount) {
     ]);
 }
 
+/**
+ * Description:
+ *      Update stargazers to the daily collection
+ *
+ * @param {string} owner repo's owner (github username).
+ * @param {string} repo repo name
+ * @param {string} repoId repo id in the repo collection
+ */
 async function updateStargazers(owner, repo, repoId) {
     // get new stargzers count
     const newStargazersCount = await getStargazersCount(owner, repo);
@@ -65,7 +89,7 @@ async function updateStargazers(owner, repo, repoId) {
                         username: item["login"],
                     };
                 });
-            collection.insertMany(stargazersList);
+            await collection.insertMany(stargazersList);
         } else {
             oldStargazersPage = parseInt(oldStargazersCount / 100);
         }
@@ -80,11 +104,13 @@ async function updateStargazers(owner, repo, repoId) {
                 username: item["login"],
             };
         });
-        collection.insertMany(stargazersList);
+        await collection.insertMany(stargazersList);
     }
     // update new stargazers number
     await updateStargazersCount(mongoose.Types.ObjectId(repoId), newStargazersCount);
-    return newStargazersCount;
+    console.log(`Original number of stargazers of ${repo} is ${oldStargazersCount}`);
+    console.log(`Latest number is ${newStargazersCount}`);
+    return;
 }
 
 module.exports = {

@@ -1,4 +1,4 @@
-const githubQueryHelper = require("./query-agent-util");
+const githubQueryHelper = require("../utils/query-agent-util");
 const createError = require("http-errors");
 const mongoose = require("mongoose");
 
@@ -6,6 +6,15 @@ require("dotenv").config();
 const repoCollection = mongoose.model(process.env.REPO_COLLECTION);
 const beforeCollection = mongoose.model(process.env.BEFORE_COLLECTION);
 
+/**
+ * Description:
+ *      Get number stargazers of the repo
+ *      Reference: https://docs.github.com/en/rest/reference/repos#get-a-repository
+ *
+ * @param {string} owner repo's owner (github username).
+ * @param {string} repo repo name
+ * @return {number} number of stargazers of this repo
+ */
 async function getStargazersCount(owner, repo) {
     const endpoint = `repos/${owner}/${repo}`;
     let result = null;
@@ -17,9 +26,19 @@ async function getStargazersCount(owner, repo) {
     return result.data.stargazers_count;
 }
 
+/**
+ * Description:
+ *      Get the stargazers list of the repo. In order to reduce query time to github api
+ *      the number of stargazers is set to max (100) per page.
+ *      Reference: https://docs.github.com/en/rest/reference/activity#list-stargazers
+ *
+ * @param {string} owner repo's owner (github username).
+ * @param {string} repo repo name
+ * @param {string} page the page of stargazers. the stargazers are in chronological order
+ *                      starting from earliest to the latest
+ * @return {object[]} return list of stargazers
+ */
 async function getStargazersList(owner, repo, page) {
-    // in order to reduce query time to github api
-    // the number of stargazers is set to max (100) per page
     const endpoint = `repos/${owner}/${repo}/stargazers`;
     const result = await githubQueryHelper.query(
         endpoint,
@@ -34,6 +53,15 @@ async function getStargazersList(owner, repo, page) {
     return result.data;
 }
 
+/**
+ * Description:
+ *      insgest the stargazers to the `befores` collection
+ *
+ * @param {string} owner repo's owner (github username).
+ * @param {string} repo repo name
+ * @param {string} repoId repo id in the repo collection
+ * @return {number} number of stargazers of this repo. if repo does not exist, return -1
+ */
 async function ingestStargazers(owner, repo, repoId) {
     // get stargzers count
     const stargazersCount = await getStargazersCount(owner, repo);
@@ -55,6 +83,18 @@ async function ingestStargazers(owner, repo, repoId) {
     return stargazersCount;
 }
 
+/**
+ * Description:
+ *      middleware for adding repo to the system
+ *
+ * @typedef {object} showRequestQuery
+ * @property {string} owner repo's owner (github username).
+ * @property {string} repo repo name
+ *
+ * @param {express.Request} req request
+ * @param {express.Response} res response
+ * @param {express.NextFunction} next next function
+ */
 async function addRepo(req, res, next) {
     const owner = req.query.owner;
     const repo = req.query.repo;

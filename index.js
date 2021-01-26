@@ -4,10 +4,13 @@ const morgan = require("morgan");
 const createError = require("http-errors");
 const HTTPStatuses = require("statuses");
 const { initializer } = require("./db/initializer");
+require("dotenv").config();
 
+require("dotenv").config();
 initializer();
 const app = express();
 
+// log the query
 app.use(morgan("combined"));
 app.use(bodyParser.json());
 app.use(
@@ -23,6 +26,7 @@ app.listen(PORT, () => {
     console.log(`Server started on port`, PORT);
 });
 
+// error handler
 app.use(function (err, req, res, next) {
     let messageToSend = null;
 

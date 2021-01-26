@@ -1,7 +1,7 @@
 {
-    "name": "github-repo-stargazers",
+    "name": "repo-stargazers-monitor",
     "version": "1.0.0",
-    "description": "System76 backend assessment - GitHub repo stargazers",
+    "description": "System76 backend assessment - GitHub repo stargazers monitor",
     "engines": {
         "node": "12.x"
     },

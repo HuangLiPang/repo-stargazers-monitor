@@ -10,6 +10,14 @@ const queryAgent = axios.create({
     headers: { accept: "application/vnd.github.v3+json" },
 });
 
+/**
+ * Description:
+ *      a wrapper for github end point
+ *
+ * @param {string} endPoint end point of the api
+ * @param {string} parameters query parameter
+ * @param {string} method query method
+ */
 function query(endPoint, parameters, method) {
     const option = {};
     switch (method) {
