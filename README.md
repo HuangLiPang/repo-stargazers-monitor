@@ -20,7 +20,7 @@ cd repo-stargazers-monitor
 npm install
 ```
 
-Create a `.env` file contains `PORT`, `MONGODB_URI`, `REPO_COLLECTION`, `BEFORE_COLLECTION`, and `NODE_ENV`. Pleasse check the example below.
+Create a `.env` file contains `PORT`, `MONGODB_URI`, `REPO_COLLECTION`, `BEFORE_COLLECTION`, and `NODE_ENV`. Please check the example below.
 
 ```text
 PORT=5000
