@@ -127,6 +127,8 @@ Please check the [daily-update-stargazers.js](./utils/daily-update-stargazers.js
    
 The [daily-update-stargazers.js](./utils/daily-update-stargazers.js) will check the `stargazers_count` of the repository in the `repo` collection and compare it with the current stargazers from the [list-stargazers](https://docs.github.com/en/rest/reference/activity#list-stargazers) github api. If the number is different, it will update the newly stargazers.
 
-I can use [Heroku Scheduler](https://elements.heroku.com/addons/scheduler) addon to update the stargazers.
+I can use [Heroku Scheduler](https://elements.heroku.com/addons/scheduler) addon to update the stargazers with following steps:
+1. Get the list of repository in the `repo` collection.
+2. Use [daily-update-stargazers.js](./utils/daily-update-stargazers.js) to update the stargazers.
 
 
